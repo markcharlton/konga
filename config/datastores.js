@@ -26,10 +26,10 @@ module.exports.datastores = {
    *
    * Installed by default.
    */
-  localDiskDb: {
+  default: {
     adapter: 'sails-disk',
     filePath:  process.env.NODE_ENV === 'test' ? './.tmp/' :  process.env.STORAGE_PATH || './kongadata/' ,
-    fileName: process.env.NODE_ENV === 'test' ? 'localDiskDb.db' : 'konga.db'
+    fileName: process.env.NODE_ENV === 'test' ? 'default.db' : 'konga.db'
   },
 
   /**
