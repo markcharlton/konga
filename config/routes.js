@@ -35,19 +35,19 @@ module.exports.routes = {
     if(process.env.NO_AUTH !== 'true') {
       const usersCount = await sails.models.user.count();
 
-      if(usersCount == 0) {
-        return res.redirect(baseUrl + 'register')
+      if(usersCount === 0) {
+          return res.redirect(baseUrl + 'register');
       }
     }
 
-    return res.view('homepage', {
-      base_url: process.env.BASE_URL || '',
-      angularDebugEnabled: process.env.NODE_ENV == 'production' ? false : true,
-      no_auth: process.env.NO_AUTH === 'true' ? true: false,
-      konga_version: require('../package.json').version,
-      accountActivated: req.query.activated ? true : false,
-      loadScripts: true
-    })
+      return res.view('homepage', {
+          base_url: process.env.BASE_URL || '',
+          angularDebugEnabled: process.env.NODE_ENV === 'production' ? false : true,
+          no_auth: process.env.NO_AUTH === 'true' ? true : false,
+          konga_version: require('../package.json').version,
+          accountActivated: req.query.activated ? true : false,
+          loadScripts: true
+      });
   },
 
   'GET /register' : async (req, res) => {
@@ -56,16 +56,16 @@ module.exports.routes = {
     const usersCount = await sails.models.user.count();
 
     if(usersCount > 0 || process.env.NO_AUTH === 'true') {
-      return res.redirect(baseUrl + '')
+        return res.redirect(baseUrl + '');
     }
 
-    return res.view('welcomepage', {
-      base_url: process.env.BASE_URL || '',
-      no_auth: process.env.NO_AUTH === 'true' ? true: false,
-      angularDebugEnabled: process.env.NODE_ENV == 'production' ? false : true,
-      konga_version: require('../package.json').version,
-      accountActivated: req.query.activated ? true : false
-    })
+      return res.view('welcomepage', {
+          base_url: process.env.BASE_URL || '',
+          no_auth: process.env.NO_AUTH === 'true' ? true : false,
+          angularDebugEnabled: process.env.NODE_ENV === 'production' ? false : true,
+          konga_version: require('../package.json').version,
+          accountActivated: req.query.activated ? true : false
+      });
   },
 
 
@@ -102,7 +102,7 @@ module.exports.routes = {
   // These must be handled by KONGA
   // 'POST /kong/certificates': 'KongCertificatesController.upload',
   // 'PATCH /kong/certificates/:id': 'KongCertificatesController.update',
-
+  //'GET /csrfToken': { action: 'security/grant-csrf-token' },
 
   // Snapshots
   'POST /api/snapshots/take': 'SnapshotController.takeSnapShot',

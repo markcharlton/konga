@@ -20,7 +20,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.connections.html
  */
-module.exports.connections = {
+module.exports.datastores = {
   /**
    * Local disk storage for DEVELOPMENT ONLY
    *
@@ -28,8 +28,8 @@ module.exports.connections = {
    */
   localDiskDb: {
     adapter: 'sails-disk',
-    filePath:  process.env.NODE_ENV == 'test' ? './.tmp/' : ( process.env.STORAGE_PATH || './kongadata/' ),
-    fileName: process.env.NODE_ENV == 'test' ? 'localDiskDb.db' : 'konga.db'
+    filePath:  process.env.NODE_ENV === 'test' ? './.tmp/' :  process.env.STORAGE_PATH || './kongadata/' ,
+    fileName: process.env.NODE_ENV === 'test' ? 'localDiskDb.db' : 'konga.db'
   },
 
   /**
@@ -39,7 +39,7 @@ module.exports.connections = {
    * Run:
    * npm install sails-mysql
    */
-  mysql: {
+  /* mysql: {
     adapter: 'sails-mysql',
     url: process.env.DB_URI || null,
     host: process.env.DB_HOST || 'localhost',
@@ -48,7 +48,7 @@ module.exports.connections = {
     password: process.env.DB_PASSWORD || null,
     database: process.env.DB_DATABASE || 'konga_database'
   },
-
+  */
   /**
    * MongoDB is the leading NoSQL database.
    * http://en.wikipedia.org/wiki/MongoDB
@@ -56,7 +56,7 @@ module.exports.connections = {
    * Run:
    * npm install sails-mongo
    */
-  mongo: {
+  /* mongo: {
     adapter: 'sails-mongo',
     url: process.env.DB_URI || null,
     host: process.env.DB_HOST || 'localhost',
@@ -65,7 +65,7 @@ module.exports.connections = {
     password: process.env.DB_PASSWORD ||  null,
     database: process.env.DB_DATABASE ||  'konga_database',
   },
-
+  */
   /**
    * PostgreSQL is another officially supported relational database.
    * http://en.wikipedia.org/wiki/PostgreSQL
@@ -84,13 +84,13 @@ module.exports.connections = {
     // schema: process.env.DB_PG_SCHEMA ||'public',
     poolSize: process.env.DB_POOLSIZE || 10,
     ssl: process.env.DB_SSL ? true : false // If set, assume it's true
-  },
+  }
 
   /**
    * More adapters:
    * https://github.com/balderdashy/sails
    */
-
+  /**
   'sqlserver': {
     adapter: 'sails-sqlserver',
     url: process.env.DB_URI || null,
@@ -100,4 +100,5 @@ module.exports.connections = {
     port: process.env.DB_PORT || 49150,
     database: process.env.DB_DATABASE ||'konga_database'
   },
+  */
 };

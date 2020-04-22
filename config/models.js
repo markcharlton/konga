@@ -20,7 +20,7 @@ module.exports.models = {
      * connections (see `config/connections.js`)                                *
      *                                                                          *
      ***************************************************************************/
-    connection: process.env.DB_ADAPTER || 'localDiskDb',
+    connection: process.env.DB_ADAPTER || 'default',
     migrate: 'alter',
 
     updateOrCreate: function(criteria, values, cb){
@@ -44,6 +44,7 @@ module.exports.models = {
      *
      * To use add a variable 'seedData' in your model and call the
      * method in the bootstrap.js file
+     * @param {string} callback what is there to say its a callback
      */
     seed: function (callback) {
         var self = this;
@@ -96,30 +97,30 @@ module.exports.models = {
 
                     const updateItem = _.find(results, (item) => {
                         return item.name === seed.name;
-                    })
+                    });
 
-                    if(updateItem) data.push(_.merge(seed, updateItem));
-                })
+                    if (updateItem) data.push(_.merge(seed, updateItem));
+                });
 
                 var fns = [];
 
                 data.forEach(function (item) {
-                    fns.push(function(cb){
+                    fns.push(function (cb) {
                         self.update({
-                            id :item.id
-                        },_.omit(item, ["id"])).exec(cb)
-                    })
-                })
+                            id: item.id
+                        }, _.omit(item, ["id"])).exec(cb);
+                    });
+                });
 
-                async.series(fns,function (err,data) {
+                async.series(fns, function (err, data) {
                     if (err) {
                         sails.log.debug(err);
                         callback();
-                    }else{
+                    } else {
                         sails.log.debug(modelName + ' seeds updated');
                         callback();
                     }
-                })
+                });
             }
         });
     },

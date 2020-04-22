@@ -19,7 +19,7 @@
  * The same command-line arguments are supported, e.g.:
  * `node app.js --silent --port=80 --prod`
  */
-require('dotenv').config()
+require('dotenv').config();
 
 // Ensure a "sails" can be located:
 let sails;
@@ -39,7 +39,7 @@ try {
 // Validate node version
 const Utils = require('./api/services/Utils');
 if(!Utils.isRuntimeVersionSupported()) {
-  sails.log.error("Incompatible Node.js version. Please make sure that you have Node.js >= 8 installed.")
+    sails.log.error("Incompatible Node.js version. Please make sure that you have Node.js >= 8 installed.");
   process.exit(1);
 }
 

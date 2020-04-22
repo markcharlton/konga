@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\api",
+    "\\api\\services",
+    "\\api\\services\\protocols",
+    "\\bin",
+    "\\charts",
+    "\\charts\\konga",
+    "\\charts\\konga\\templates",
+    "\\tasks",
+    "\\tasks\\config",
+    "\\tasks\\register"
+  ],
+  "SelectedNode": "\\tasks\\pipeline.js",
+  "PreviewInSolutionExplorer": false
+}
