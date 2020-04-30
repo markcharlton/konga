@@ -20,7 +20,7 @@ var _ = require('lodash');
 var defaultModel = {
   schema: true,
   tableName : "konga_passports",
-  autoPK : false,
+  // autoPK : false,
 
   attributes: {
 

@@ -87,7 +87,7 @@ module.exports = {
                         '<p><a href="' + link + '">' + link + '</a></p>'
                     };
 
-                    if(settings.default_transport == 'sendmail') {
+                    if(settings.default_transport === 'sendmail') {
                         sendmail(mailOptions, function(err, reply) {
                             if(err){
                                 sails.log.error("user-events:notify:error",err)

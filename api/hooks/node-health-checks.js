@@ -10,6 +10,8 @@ var cron = require('node-cron');
  *
  * This file contains a custom hook, that will be run after sails.js orm hook is loaded. Purpose of this hook is to
  * check that database contains necessary initial data for application.
+ * @returns {string}  Initial data
+ * @param {string} sails Sails 
  */
 module.exports = function hook(sails) {
   return {

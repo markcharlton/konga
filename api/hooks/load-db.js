@@ -9,6 +9,8 @@ var defSeedData = require('../../config/default-seed-data.js');
  *
  * This file contains a custom hook, that will be run after sails.js orm hook is loaded. Purpose of this hook is to
  * check that database contains necessary initial data for application.
+ * @returns  {string} Initial data 
+ * @param {string} sails  Sails 
  */
 module.exports = function hook(sails) {
   return {
@@ -20,7 +22,7 @@ module.exports = function hook(sails) {
      */
     process: function process(next) {
 
-        if(sails.config.environment != 'test') {
+        if(sails.config.environment !== 'test') {
             var seedPassports = function(cb) {
                 sails.models.user
                     .find()
@@ -31,14 +33,14 @@ module.exports = function hook(sails) {
                         users.forEach(function(user){
                             passportsFns.push(function(_cb){
                                 var passwordToSetArr = defSeedData.userSeedData.filter( function (orig) {
-                                  return (orig.username == user.username)
+                                  return (orig.username === user.username)
                                 });
                                 var passwordToSet = undefined;
-                                if (passwordToSetArr.length == [1]) {
+                                if (passwordToSetArr.length === [1]) {
                                   passwordToSet = passwordToSetArr[0].password;
                                 }
                                 // Only set the password if we have one
-                                if (typeof(passwordToSet) != 'undefined') {
+                                if (typeof(passwordToSet) !== 'undefined') {
                                   sails.models.passport
                                       .create({
                                           protocol: "local",

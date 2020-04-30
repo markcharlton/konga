@@ -5,7 +5,7 @@ var _ = require('lodash');
 var semver = require('semver');
 var KongService = require('./KongService');
 var async = require('async');
-var Utils = require('../helpers/utils');
+// var Utils = require('../helpers/utils');
 
 module.exports = {
 
@@ -89,7 +89,7 @@ module.exports = {
         sails.models.snapshot.create({
           name: snapshotName || "snap@" + Date.now(),
           kong_node_name: node.name,
-          kong_node_url: Utils.withoutTrailingSlash(node.kong_admin_url),
+          kong_node_url: sails.helper.withoutTrailingSlash(node.kong_admin_url),
           kong_version: node.kong_version,
           data: entities
         }).exec(function (err, created) {
@@ -115,7 +115,7 @@ module.exports = {
 
       var endpoints = ['/apis', '/plugins', '/consumers']
 
-      status.version = Utils.ensureSemverFormat(status.version);
+      status.version = sails.helper.ensureSemverFormat(status.version);
 
       if (semver.gte(status.version, '0.10.0')) {
         endpoints = endpoints.concat(['/upstreams']);
@@ -307,7 +307,7 @@ module.exports = {
               sails.models.snapshot.create({
                 name: name || "snap@" + Date.now(),
                 kong_node_name: node.name,
-                kong_node_url: Utils.withoutTrailingSlash(node.kong_admin_url),
+                kong_node_url: sails.helper.withoutTrailingSlash(node.kong_admin_url),
                 kong_version: status.version,
                 data: result
               }).exec(function (err, created) {

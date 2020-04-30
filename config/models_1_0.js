@@ -22,7 +22,7 @@ module.exports.models = {
   // that models will use, unless overridden directly in the model file in `api/models`.
   // It defaults to a datastore called `default`, which (unless otherwise configured in
   // the `config/datastores.js` file) uses the built-in `sails-disk` adapter.
-  datastore: 'localDiskDb',
+  datastore: 'default',
 
   // Because you can't have the old `connection` setting at the same time as the new
   // `datastore` setting, we'll set it to `null` here.  When you merge this file into your
@@ -60,7 +60,7 @@ module.exports.models = {
   *                                                                             *
   ******************************************************************************/
   dataEncryptionKeys: {
-    default: 'nZ/YrKnyEvr9Yf2FWSj5cscoqxtgRsWCMiJFHd/looE='
+    default: 'aNG16R8WAJ6tUr4vx9rimZKc2v9/dGEqk1hpJ6DJB5U='
   },
 
 };

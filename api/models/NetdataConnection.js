@@ -10,7 +10,7 @@ var _ = require('lodash');
  */
 var defaultModel = _.merge(_.cloneDeep(require('../base/Model')), {
   tableName: "konga_netdata_connections",
-  autoPK: false,
+//  autoPK: false,
   attributes: {
     id: {
       type: 'integer',

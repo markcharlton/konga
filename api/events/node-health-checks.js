@@ -23,7 +23,7 @@ var sendmail = require('sendmail')({
     silent: false
 })
 
-var Utils = require("../helpers/utils");
+// var Utils = require("../helpers/utils");
 
 module.exports = {
     emit : function(event,data) {
@@ -88,7 +88,7 @@ module.exports = {
                     tasks[node.id].timesFailed++;
                     sails.log('health_checks:cron:checkStatus => Health check for node ' + node.id + ' failed ' + tasks[node.id].timesFailed + ' times');
 
-                    var timeDiff = Utils.getMinutesDiff(new Date(),tasks[node.id].lastNotified)
+                    var timeDiff = sails.helper.getMinutesDiff(new Date(),tasks[node.id].lastNotified)
                     sails.log('health_checks:cron:checkStatus:last notified => ' + tasks[node.id].lastNotified);
                     sails.log('health_checks:cron:checkStatus => Checking if eligible for notification',timeDiff);
                     if(!tasks[node.id].lastNotified || timeDiff > notificationsInterval) {
@@ -111,7 +111,7 @@ module.exports = {
                         sails.log('health_checks:cron:checkStatus => Health check for node ' + node.id + ' failed ' + tasks[node.id].timesFailed + ' times.' +
                           'Database is unreachable');
 
-                        var timeDiff = Utils.getMinutesDiff(new Date(),tasks[node.id].lastNotified)
+                        // var timeDiff = sails.helper.getMinutesDiff(new Date(),tasks[node.id].lastNotified)
                         sails.log('health_checks:cron:checkStatus:last notified => ' + tasks[node.id].lastNotified);
                         sails.log('health_checks:cron:checkStatus => Checking if eligible for notification',timeDiff);
                         if(!tasks[node.id].lastNotified || timeDiff > notificationsInterval) {
@@ -190,13 +190,13 @@ module.exports = {
         sails.models.settings.find().limit(1)
             .exec(function(err,settings) {
                 if (err) return cb(err)
-                sails.log("helath_checks:settings =>", settings)
+                sails.log("health_checks:settings =>", settings)
                 if (!settings.length
                     || !settings[0].data
                     || !settings[0].data.notify_when.node_down.active) return false;
 
 
-                Utils.sendSlackNotification(settings[0],self.makePlainTextNotification(node));
+                sails.helper.sendSlackNotification(settings[0],self.makePlainTextNotification(node));
 
                 self.createTransporter(settings[0],function(err,result){
                     if(err || !result) {
@@ -206,7 +206,7 @@ module.exports = {
                         var html = self.makeHTMLNotification(node)
                         var settings = result.settings
 
-                        Utils.getAdminEmailList(function(err,receivers){
+                        getAdminEmailList(function(err,receivers){
                             sails.log("health_checks:notify:receivers => ",  receivers)
                             if(!err && receivers.length) {
 
@@ -217,7 +217,7 @@ module.exports = {
                                     html: html
                                 };
 
-                                if(settings.default_transport == 'sendmail') {
+                                if(settings.default_transport === 'sendmail') {
                                     sendmail(mailOptions, function(err, reply) {
                                         if(err){
                                             sails.log.error("Health_checks:notify:error",err)

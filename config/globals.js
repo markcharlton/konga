@@ -5,11 +5,9 @@
 
  module.exports.globals = {
 
-   _: false,
+   _: require('lodash'),
 
    async: false,
-
-   lodash: true,
 
    models: false,
 

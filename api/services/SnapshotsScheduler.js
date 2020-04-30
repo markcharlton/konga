@@ -6,7 +6,7 @@ var tasks = {};
 var semver = require('semver');
 var KongService = require('./KongService')
 var SnapshotsService = require('./SnapshotsService');
-var Utils = require('../helpers/utils');
+// var Utils = require('../helpers/utils');
 
 module.exports = {
 
@@ -68,7 +68,7 @@ module.exports = {
 
       var endpoints = ['/apis', '/plugins', '/consumers']
 
-      status.version = Utils.ensureSemverFormat(status.version);
+      status.version = sails.helpers.ensureSemverFormat(status.version);
 
       if (semver.gte(status.version, '0.10.0')) {
         endpoints = endpoints.concat(['/upstreams']);

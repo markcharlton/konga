@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var HealthCheckEvents = require("../events/api-health-checks")
+// var HealthCheckEvents = require("../events/api-health-checks");
 
 /**
  * ApiHealthCheck.js
@@ -10,12 +10,13 @@ var HealthCheckEvents = require("../events/api-health-checks")
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 var defaultModel = _.merge(_.cloneDeep(require('../base/Model')), {
-  tableName : "konga_api_health_checks",
-  autoPK : false,
+    tableName: "konga_api_health_checks",
+    primaryKey: 'id',
+ // autoPK : false,
   attributes: {
     id : {
-      type: 'integer',
-      primaryKey: true,
+      type: 'number',
+      // primaryKey: true,
       unique: true,
       autoIncrement : true
     },
@@ -78,11 +79,11 @@ var mongoModel = function() {
   return obj;
 }
 
-if(sails.config.models.connection == 'postgres' && process.env.DB_PG_SCHEMA) {
+if(sails.config.datastores === 'postgres' && process.env.DB_PG_SCHEMA) {
   defaultModel.meta =  {
     schemaName: process.env.DB_PG_SCHEMA
   }
 }
 
 
-module.exports = sails.config.models.connection == 'mongo' ? mongoModel() : defaultModel
+module.exports = sails.config.models.datastores === 'mongo' ? mongoModel() : defaultModel

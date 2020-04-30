@@ -10,7 +10,7 @@ var _ = require('lodash');
  */
 var defaultModel = _.merge(_.cloneDeep(require('../base/Model')), {
     tableName: "konga_kong_snapshots",
-    autoPK: false,
+    // autoPK: false,
     attributes: {
         id: {
             type: 'integer',
@@ -55,11 +55,11 @@ var mongoModel = function () {
     return obj;
 }
 
-if(sails.config.models.connection == 'postgres' && process.env.DB_PG_SCHEMA) {
+if(sails.config.models.connection === 'postgres' && process.env.DB_PG_SCHEMA) {
   defaultModel.meta =  {
     schemaName: process.env.DB_PG_SCHEMA
   }
 }
 
 
-module.exports = sails.config.models.connection == 'mongo' ? mongoModel() : defaultModel
+module.exports = sails.config.models.connection === 'mongo' ? mongoModel() : defaultModel

@@ -20,8 +20,9 @@ const sendmail = require('sendmail')({
         error: console.error
     },
     silent: false
-})
-const Utils = require("../helpers/utils");
+});
+
+// const Utils = require("../helpers/utils");
 
 let tasks = {};
 
@@ -182,7 +183,7 @@ module.exports = {
               if (!settings.length || !settings[0].data) return false;
 
               if(hc.slack) {
-                  Utils.sendSlackNotification(settings[0],self.makePlainTextNotification(connection, unhealthyTargets));
+                  sails.helper.sendSlackNotification(settings[0],self.makePlainTextNotification(connection, unhealthyTargets));
               }else{
                   sails.log("Slack notifications are disabled for this Upstream.")
               }
@@ -196,7 +197,7 @@ module.exports = {
                           var settings = result.settings
                           var html = self.makeHTMLNotification(connection, unhealthyTargets)
 
-                          Utils.getAdminEmailList(function (err, receivers) {
+                          sails.helper.getAdminEmail(function (err, receivers) {
                               sails.log("Upstream health:notify:receivers => ", receivers)
                               if (!err && receivers.length) {
 
@@ -207,7 +208,7 @@ module.exports = {
                                       html: html
                                   };
 
-                                  if (settings.default_transport == 'sendmail') {
+                                  if (settings.default_transport === 'sendmail') {
                                       sendmail(mailOptions, function (err, reply) {
                                           if (err) {
                                               sails.log.error("Upstream health:notify:error", err)

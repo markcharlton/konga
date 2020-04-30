@@ -43,10 +43,10 @@ module.exports.sockets = {
    * Options: `socket.io-redis` or `memory`
    */
   adapter: process.env.SOCKET_ADAPTER || 'memory',
-  host: process.env.REDIS_HOST || 'localhost',
-  port: process.env.REDIS_PORT || 6379,
-  db: process.env.REDIS_DB || 'konga',
-  pass: process.env.REDIS_PASS || null,
+  // host: process.env.REDIS_HOST || 'localhost',
+  // port: process.env.REDIS_PORT || 6379,
+  // db: process.env.REDIS_DB || 'konga',
+  // pass: process.env.REDIS_PASS || null,
   //
   // -OR-
   //
@@ -132,7 +132,7 @@ module.exports.sockets = {
     'polling'
   ],
 
-  origins: '*:*',
+  origins: '*:*'
 
   // More configuration options for Sails+Socket.io:
   // http://sailsjs.org/#/documentation/reference/sails.config/sails.config.sockets.html

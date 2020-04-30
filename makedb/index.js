@@ -1,12 +1,12 @@
 /**
  * Created by user on 06/10/2017.
  */
-'use strict'
+'use strict';
 
 
 module.exports = function (next) {
 
-    if(process.env.NODE_ENV == 'production') return next();
+    if(process.env.NODE_ENV === 'production') return next();
 
     switch (process.env.DB_ADAPTER) {
         case("postgres"):
