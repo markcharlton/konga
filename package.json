@@ -53,7 +53,7 @@
     "sails-hook-grunt": "^1.0.8",
     "sails-hook-organics": "^1.1.0",
     "sails-hook-orm": "^2.1.1",
-    "sails-hook-sockets": "^1.5.5",
+    "sails-hook-sockets": "^2.0.3",
     "sails-mongo": "^1.1.0",
     "sails-mysql": "^1.0.1",
     "sails-postgresql": "^1.0.2",
